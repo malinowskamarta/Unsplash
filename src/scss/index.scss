@@ -6,9 +6,10 @@
     box-sizing: border-box;
 }
 
+
 .header-section {
-    background-color: black;
-    padding: 10px;
+        background-color: black;
+        padding: 10px;
 }
 
 .main-section {
@@ -102,21 +103,65 @@
 .autocomplete__results{
     color: white;
     background-color: black;
+
     font-size: 20px;
     position: absolute;
+    padding: 20px;
+    column-count: 5;
+    left: 0%;  
+    right: 0%;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+
+}
+
+
+.autocomplete__result-thumb{
+    color: white;
+    background-color: black;
+
+    position: relative;
     padding: 30px;
     column-count: 5;
-    right: 0;
     justify-content: space-between;
+
+}
+.users-tab__results {
+    color: white;
+    position: relative;
+    bottom: 0;
+    font-size: 20px;
+    align-items: center;
 }
 
-.users-tab__results {
-    color: yellow;
-    position: absolute;
-top: 0;
-}
+
 
 .collections-tab__results{
-    position: absolute;
-    top: 0;
+    position: relative;
+    bottom: 0;
+    font-size: 20px;
+    align-items: center;
+    
 }
+
+@media screen and (max-device-width: 480px) {
+    .title{
+        font-size: 30px;
+        font-weight: 100;
+    }           
+    .title2{
+        font-size: 50px;
+    }
+    .js-tabs__tab{
+        font-size: 20px;
+    }
+    .autocomplete__results{
+        columns: 1;
+    }
+    .photos-tab__results{
+        columns: 1;
+    }
+    
+}
+

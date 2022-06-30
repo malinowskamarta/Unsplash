@@ -46,15 +46,15 @@ export function initializeCollectionsTab() {
 
     let debounceTimeout; 
     
-    // searchInput.addEventListener('focus', () => {
-    //     autocompleteResults.classList.remove('hide');
-    //     });
-    //     document.addEventListener('click', (event) => {
-    //     if (event.target == searchInput || autocompleteResults.contains(event.target)) {
-    //     return;
-    //     }
-    //     autocompleteResults.classList.add('hide');
-    //     });
+    searchInput.addEventListener('focus', () => {
+        autocompleteResults.classList.remove('hide');
+        });
+        document.addEventListener('click', (event) => {
+        if (event.target == searchInput || autocompleteResults.contains(event.target)) {
+        return;
+        }
+        autocompleteResults.classList.add('hide');
+        });
 
     searchInput.addEventListener('keyup', () => {
         if (debounceTimeout) {
@@ -86,30 +86,32 @@ export function initializeCollectionsTab() {
         getCollectionPicture(collectionId)
         .then((pictures) => {
             console.log("pic",pictures);
+
+
             // console.log(results.innerHTML)
             const picture = createPictures(pictures);
             results.appendChild(picture)
             // console.log(results.innerHTML)
         });
+        autocompleteResults.innerHTML = '';
+
     }
 
 
     function createPictures(pictures){
-        console.log("pictures",pictures)
+        
+        // console.log("pictures",pictures)
         const rowDiv = createElement('div', {
             class: 'autocomplete__result-row'
         });
-
-        const img = createElement('img', {
-            class: 'autocomplete__result-thumb',
-            src: pictures.current_user_collections
-            
-        });
-        console.log("img",img)
-        // img.innerHTML = pictures.photos
-        //console.log(pictures)
-        rowDiv.appendChild(img);
-
+        pictures.forEach(elem => {
+            console.log(elem.urls.small);
+            const img = createElement('img', {
+                class: 'autocomplete__result-thumb',
+                src: elem.urls.small
+            });
+            rowDiv.appendChild(img);
+        }); 
         return rowDiv;
 
     }
@@ -129,6 +131,8 @@ export function initializeCollectionsTab() {
             class: 'autocomplete__result-thumb',
             src: collection.cover_photo.urls.thumb
         });
+
+
 
         rowDiv.appendChild(titleSpan);
         rowDiv.appendChild(img);
@@ -154,6 +158,7 @@ export function initializeUsersTab() {
         debounceTimeout = setTimeout(() => {
             searchUsers(searchInput.value)
             .then((users) => {
+                results.innerHTML = ''
                 autocompleteResults.innerHTML = '';
 
                 for (const user of users.results) {
@@ -161,15 +166,21 @@ export function initializeUsersTab() {
 
                     rowDiv.addEventListener('click', () => {
                         handleAutocompleteSelect(user.username);
+
                     });
 
                     autocompleteResults.appendChild(rowDiv);
-                }
 
+                }
+                
                 console.log(users);
+
             });
+
         }, 200);
+
     });
+
 
 function handleAutocompleteSelect(userUserName) {
     // console.log(results)
@@ -191,8 +202,6 @@ function handleAutocompleteSelect(userUserName) {
 
 
 }
-
-
 
 function createProfile(publicProfile) {
     const rowDiv = createElement('div', {
@@ -227,11 +236,14 @@ function createProfile(publicProfile) {
         src: publicProfile.total_likes
     })
     likes_amount.innerHTML = 'Total likes: ' + publicProfile.total_likes
+
+   
     // console.log(first_name);
     // console.log(last_name);
     // console.log(portfolio_url);
     // console.log(photos_amount);
     // console.log(likes_amount);
+
     rowDiv.appendChild(first_name)
     rowDiv.appendChild(last_name)
     rowDiv.appendChild(portfolio_url)
@@ -239,7 +251,11 @@ function createProfile(publicProfile) {
     rowDiv.appendChild(likes_amount)
 
     return rowDiv
+
+
 }
+
+
 
 function createPictures(likedPhotos){
     // console.log("pictures",pictures)
@@ -281,18 +297,11 @@ function createRow(user) {
     rowDiv.appendChild(img);
 
     return rowDiv;
+    
 }
 
 }
 
-// document.body.onload = () => {
-//     const grid = document.querySelector('.grid');
-
-//     const masonry = new Masonry(grid, {
-//         itemSelector: '.photos-tab__results',
-//         gutter: 10,
-//     })
-// }
 
 
 

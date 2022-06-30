@@ -23,6 +23,7 @@ export function getCollectionPicture(collectionId) {
 
     return fetch(`${settings.baseApiUrl}collections/${collectionId}/photos${queryString}`)
         .then((rsp) => rsp.json()).then( aa => aa);    
+
 }
 
 
