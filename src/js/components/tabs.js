@@ -64,6 +64,8 @@ export function initializeCollectionsTab() {
         debounceTimeout = setTimeout(() => {
             searchCollections(searchInput.value)
             .then((collections) => {
+                results.innerHTML = ''
+
                 autocompleteResults.innerHTML = '';
 
                 for (const collection of collections.results) {
@@ -107,7 +109,7 @@ export function initializeCollectionsTab() {
         pictures.forEach(elem => {
             console.log(elem.urls.small);
             const img = createElement('img', {
-                class: 'autocomplete__result-thumb',
+                class: 'autocomplete__result-small',
                 src: elem.urls.small
             });
             rowDiv.appendChild(img);
@@ -237,7 +239,7 @@ function createProfile(publicProfile) {
     })
     likes_amount.innerHTML = 'Total likes: ' + publicProfile.total_likes
 
-   
+
     // console.log(first_name);
     // console.log(last_name);
     // console.log(portfolio_url);

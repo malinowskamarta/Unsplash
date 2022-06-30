@@ -120,12 +120,23 @@
 .autocomplete__result-thumb{
     color: white;
     background-color: black;
-
     position: relative;
     padding: 30px;
     column-count: 5;
     justify-content: space-between;
 
+}
+
+.autocomplete__result-small{
+    background-color: black;
+    position: relative;
+    padding: 20px;
+    display: flexbox;
+    column-count: 2;
+}
+
+.autocomplete__result-row{
+    background-color: black;
 }
 .users-tab__results {
     color: white;
